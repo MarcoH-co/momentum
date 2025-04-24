@@ -11,10 +11,21 @@ function getLocation() {
       options
     );
   }
+
+  const API_KEY = "2a487138ecdf8b4c7dceda0ee2603d86";
   
   function successCallback(position) {
-    console.log("위도:", position.coords.latitude);
-    console.log("경도:", position.coords.longitude);
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric`;
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const weather = document.querySelector("#weather span:first-child");
+        const city = document.querySelector("#weather span:last-child");
+        city.innerText = data.name;
+        weather.innerText = `${data.weather[0].main} / ${data.main.temp}`;
+    });
   }
   
   function onGeoError(error) {

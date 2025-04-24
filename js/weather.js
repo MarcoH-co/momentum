@@ -44,5 +44,5 @@ function getLocation() {
 
   navigator.geolocation.getCurrentPosition(
     successCallback, 
-    onGeoError,
+    onGeoError
   );

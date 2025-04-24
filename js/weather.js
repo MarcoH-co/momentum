@@ -17,6 +17,10 @@ function getLocation() {
     console.log("경도:", position.coords.longitude);
   }
   
+  function onGeoError(error) {
+    alert("Can't find you");
+  }
+  
   function errorCallback(error) {
     console.error("위치 정보를 가져올 수 없습니다:", error.code, error.message);
     
@@ -38,4 +42,7 @@ function getLocation() {
   }
 
 
-  getLocation();
+  navigator.geolocation.getCurrentPosition(
+    successCallback, 
+    onGeoError,
+  );
